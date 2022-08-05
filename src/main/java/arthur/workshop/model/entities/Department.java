@@ -1,4 +1,4 @@
-package arthur.workshop.entities;
+package arthur.workshop.model.entities;
 
 import java.io.Serializable;
 
