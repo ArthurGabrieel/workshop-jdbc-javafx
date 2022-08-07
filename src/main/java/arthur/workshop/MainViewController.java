@@ -1,6 +1,7 @@
 package arthur.workshop;
 
 import arthur.workshop.model.services.DepartmentService;
+import arthur.workshop.model.services.SellerService;
 import arthur.workshop.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,10 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemSellerAction() {
-        System.out.println("menu item seller");
+        loadView("SellerList.fxml", (SellerListController controller) -> {
+            controller.setSellerService(new SellerService());
+            controller.updateTableView();
+        });
     }
 
     @FXML
