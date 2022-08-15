@@ -28,6 +28,14 @@ public class Utils {
         }
     }
 
+    public static Double tryParseToDouble(String str) {
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {
         tableColumn.setCellFactory(column -> {
             TableCell<T, Date> cell = new TableCell<T, Date>() {
@@ -49,7 +57,7 @@ public class Utils {
 
     public static <T> void formatTableColumnDouble(TableColumn<T, Double> tableColumn, int decimalPlaces) {
         tableColumn.setCellFactory(column -> {
-            TableCell<T, Double> cell = new TableCell<>() {
+            TableCell<T, Double> cell = new TableCell<T, Double>() {
                 @Override
                 protected void updateItem(Double item, boolean empty) {
                     super.updateItem(item, empty);
@@ -69,9 +77,11 @@ public class Utils {
         datePicker.setConverter(new StringConverter<LocalDate>() {
 
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(format);
+
             {
                 datePicker.setPromptText(format.toLowerCase());
             }
+
             @Override
             public String toString(LocalDate date) {
                 if (date != null) {
@@ -80,6 +90,7 @@ public class Utils {
                     return "";
                 }
             }
+
             @Override
             public LocalDate fromString(String string) {
                 if (string != null && !string.isEmpty()) {
